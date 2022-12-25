@@ -2,3 +2,5 @@
 *.pyc
 *.profile
 rules
+.vscode/
+

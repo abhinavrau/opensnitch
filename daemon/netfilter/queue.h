@@ -14,6 +14,13 @@
 #include <linux/netfilter.h>
 #include <libnetfilter_queue/libnetfilter_queue.h>
 
+typedef unsigned int uint;
+typedef unsigned int u_int32_t;
+typedef unsigned short u_int16_t;
+typedef unsigned char u_int8_t;
+
+
+
 typedef struct {
     uint verdict;
     uint mark;
@@ -29,7 +36,7 @@ extern void go_callback(int id, unsigned char* data, int len, uint mark, u_int32
 static uint8_t stop = 0;
 
 static inline void configure_uid_if_available(struct nfq_q_handle *qh){
-    void *hndl = dlopen("libnetfilter_queue.so.1", RTLD_LAZY);
+    /* void *hndl = dlopen("libnetfilter_queue.so.1", RTLD_LAZY);
     if (!hndl) {
         hndl = dlopen("libnetfilter_queue.so", RTLD_LAZY);
         if (!hndl){
@@ -42,6 +49,7 @@ static inline void configure_uid_if_available(struct nfq_q_handle *qh){
         return;
     }
     printf("OK: libnetfiler_queue supports nfq_get_uid\n");
+    */
 #ifdef NFQA_CFG_F_UID_GID
     if (qh != NULL && nfq_set_queue_flags(qh, NFQA_CFG_F_UID_GID, NFQA_CFG_F_UID_GID)){
         printf("WARNING: UID not available on this kernel/libnetfilter_queue\n");
